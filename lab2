@@ -11,3 +11,7 @@ CREATE TABLE Department (
     DeptNo NUMBER PRIMARY KEY,
     DeptName VARCHAR2(50) UNIQUE NOT NULL
 );
+
+ALTER TABLE Employee
+ADD CONSTRAINT FK_Employee_Department
+FOREIGN KEY (DNo) REFERENCES Department(DeptNo);
