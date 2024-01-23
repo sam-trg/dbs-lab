@@ -19,3 +19,5 @@ SELECT emp_name FROM employee;
 SELECT * FROM employee WHERE emp_address = 'MANIPAL';
 
 ALTER TABLE employee ADD salary NUMBER;
+
+UPDATE employee SET salary = 50000;
