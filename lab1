@@ -5,3 +5,6 @@ CREATE TABLE employee (
 );
 
 INSERT INTO employee VALUES (1, 'Beta Sharmajika', '123 Block B, City1');
+
+INSERT INTO employee VALUES (2, 'Amrita Sharma', '456 Block C, City2');
+
