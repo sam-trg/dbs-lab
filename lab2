@@ -35,3 +35,4 @@ ALTER TABLE Employee MODIFY Salary DEFAULT 10000;
 
 INSERT INTO Employee (EmpNo, EmpName, Gender, Address, DNo) VALUES (302, 'Another Test Employee', 'F', '123 Pine St', 2);
 
+SELECT * FROM Employee WHERE EmpNo = 302;
