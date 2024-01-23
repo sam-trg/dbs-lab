@@ -17,3 +17,5 @@ INSERT INTO employee VALUES (5, 'James Charles', '202 Block D, City5');
 SELECT emp_name FROM employee;
 
 SELECT * FROM employee WHERE emp_address = 'MANIPAL';
+
+ALTER TABLE employee ADD salary NUMBER;
