@@ -1,1 +1,9 @@
+CREATE TABLE Employee (
+    EmpNo NUMBER PRIMARY KEY,
+    EmpName VARCHAR2(50) NOT NULL,
+    Gender CHAR(1) CHECK (Gender IN ('M', 'F')) NOT NULL,
+    Salary NUMBER NOT NULL,
+    Address VARCHAR2(100) NOT NULL,
+    DNo NUMBER
+);
 
