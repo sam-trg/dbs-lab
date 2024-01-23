@@ -30,3 +30,6 @@ INSERT ALL
     INTO Employee (EmpNo, EmpName, Gender, Salary, Address, DNo) VALUES (102, 'Jane Smith', 'F', 60000, '456 Oak St', 2)
     INTO Employee (EmpNo, EmpName, Gender, Salary, Address, DNo) VALUES (103, 'Bob Johnson', 'M', 55000, '789 Pine St', 3)
 SELECT * FROM dual;
+
+ALTER TABLE Employee MODIFY Salary DEFAULT 10000;
+
