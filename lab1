@@ -15,3 +15,5 @@ INSERT INTO employee VALUES (4, 'Ashok Kumar', '101 Block F, City4');
 INSERT INTO employee VALUES (5, 'James Charles', '202 Block D, City5');
 
 SELECT emp_name FROM employee;
+
+SELECT * FROM employee WHERE emp_address = 'MANIPAL';
