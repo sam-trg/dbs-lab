@@ -3,3 +3,5 @@ CREATE TABLE employee (
     emp_name VARCHAR2(50),
     emp_address VARCHAR2(100)
 );
+
+INSERT INTO employee VALUES (1, 'Beta Sharmajika', '123 Block B, City1');
