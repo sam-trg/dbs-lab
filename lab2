@@ -17,3 +17,10 @@ ADD CONSTRAINT FK_Employee_Department
 FOREIGN KEY (DNo) REFERENCES Department(DeptNo);
 
 ALTER TABLE Department ADD Location VARCHAR2(50);
+
+INSERT INTO Department (DeptNo, DeptName, Location) VALUES (1, 'HR', 'Building A');
+
+INSERT ALL
+    INTO Department (DeptNo, DeptName, "LOCATION") VALUES (2, 'IT', 'Building B')
+    INTO Department (DeptNo, DeptName, "LOCATION") VALUES (3, 'Finance', 'Building C')
+SELECT * FROM dual;
