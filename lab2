@@ -7,3 +7,7 @@ CREATE TABLE Employee (
     DNo NUMBER
 );
 
+CREATE TABLE Department (
+    DeptNo NUMBER PRIMARY KEY,
+    DeptName VARCHAR2(50) UNIQUE NOT NULL
+);
