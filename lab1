@@ -23,3 +23,5 @@ ALTER TABLE employee ADD salary NUMBER;
 UPDATE employee SET salary = 50000;
 
 DESCRIBE employee;
+
+DELETE FROM employee WHERE emp_address = 'MANGALORE';
