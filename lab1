@@ -10,3 +10,4 @@ INSERT INTO employee VALUES (2, 'Amrita Sharma', '456 Block C, City2');
 
 INSERT INTO employee VALUES (3, 'Beti Guptajiki', '789 Block A, City3');
 
+INSERT INTO employee VALUES (4, 'Ashok Kumar', '101 Block F, City4');
