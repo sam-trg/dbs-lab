@@ -24,3 +24,9 @@ INSERT ALL
     INTO Department (DeptNo, DeptName, "LOCATION") VALUES (2, 'IT', 'Building B')
     INTO Department (DeptNo, DeptName, "LOCATION") VALUES (3, 'Finance', 'Building C')
 SELECT * FROM dual;
+
+INSERT ALL
+    INTO Employee (EmpNo, EmpName, Gender, Salary, Address, DNo) VALUES (101, 'John Doe', 'M', 50000, '123 Main St', 1)
+    INTO Employee (EmpNo, EmpName, Gender, Salary, Address, DNo) VALUES (102, 'Jane Smith', 'F', 60000, '456 Oak St', 2)
+    INTO Employee (EmpNo, EmpName, Gender, Salary, Address, DNo) VALUES (103, 'Bob Johnson', 'M', 55000, '789 Pine St', 3)
+SELECT * FROM dual;
