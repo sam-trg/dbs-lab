@@ -15,3 +15,5 @@ CREATE TABLE Department (
 ALTER TABLE Employee
 ADD CONSTRAINT FK_Employee_Department
 FOREIGN KEY (DNo) REFERENCES Department(DeptNo);
+
+ALTER TABLE Department ADD Location VARCHAR2(50);
