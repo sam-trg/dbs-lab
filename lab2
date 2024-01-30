@@ -34,3 +34,115 @@ SELECT * FROM dual;
 ALTER TABLE Employee MODIFY Salary DEFAULT 10000;
 INSERT INTO Employee (EmpNo, EmpName, Gender, Address, DNo) VALUES (302, 'Another Test Employee', 'F', '123 Pine St', 2);
 SELECT * FROM Employee WHERE EmpNo = 302;
+
+
+
+
+/*
+test code
+
+-- Create Student table
+CREATE TABLE Student (
+    ID INT PRIMARY KEY,
+    name VARCHAR2(50),
+    dept_name VARCHAR2(50),
+    tot_cred INT
+);
+
+-- Create Instructor table
+CREATE TABLE Instructor (
+    ID INT PRIMARY KEY,
+    name VARCHAR2(50),
+    dept_name VARCHAR2(50),
+    salary NUMBER
+);
+
+-- Create Course table
+CREATE TABLE Course (
+    course_id VARCHAR2(10) PRIMARY KEY,
+    title VARCHAR2(100),
+    dept_name VARCHAR2(50),
+    credits INT
+);
+
+-- Create Takes table
+CREATE TABLE Takes (
+    ID INT,
+    course_id VARCHAR2(10),
+    sec_id INT,
+    semester VARCHAR2(20),
+    year INT,
+    grade VARCHAR2(2),
+    PRIMARY KEY (ID, course_id, sec_id, semester, year),
+    FOREIGN KEY (ID) REFERENCES Student(ID),
+    FOREIGN KEY (course_id, sec_id, semester, year) REFERENCES Section(course_id, section_id, semester, year)
+);
+
+-- Create Classroom table
+CREATE TABLE Classroom (
+    building VARCHAR2(50),
+    room_number INT,
+    capacity INT,
+    PRIMARY KEY (building, room_number)
+);
+
+-- Create Department table
+CREATE TABLE Department (
+    dept_name VARCHAR2(50) PRIMARY KEY,
+    building VARCHAR2(50),
+    budget NUMBER
+);
+
+-- Create Section table
+CREATE TABLE Section (
+    course_id VARCHAR2(10),
+    section_id INT,
+    semester VARCHAR2(20),
+    year INT,
+    building VARCHAR2(50),
+    room_number INT,
+    time_slot_id INT,
+    PRIMARY KEY (course_id, section_id, semester, year),
+    FOREIGN KEY (course_id) REFERENCES Course(course_id),
+    FOREIGN KEY (building, room_number) REFERENCES Classroom(building, room_number),
+    FOREIGN KEY (time_slot_id) REFERENCES Time_slot(time_slot_id)
+);
+
+-- Create Teaches table
+CREATE TABLE Teaches (
+    ID INT,
+    course_id VARCHAR2(10),
+    section_id INT,
+    semester VARCHAR2(20),
+    year INT,
+    PRIMARY KEY (ID, course_id, section_id, semester, year),
+    FOREIGN KEY (ID) REFERENCES Instructor(ID),
+    FOREIGN KEY (course_id, section_id, semester, year) REFERENCES Section(course_id, section_id, semester, year)
+);
+
+-- Create Advisor table
+CREATE TABLE Advisor (
+    s_id INT PRIMARY KEY,
+    i_id INT,
+    FOREIGN KEY (s_id) REFERENCES Student(ID),
+    FOREIGN KEY (i_id) REFERENCES Instructor(ID)
+);
+
+-- Create Time_slot table
+CREATE TABLE Time_slot (
+    time_slot_id INT PRIMARY KEY,
+    day VARCHAR2(10),
+    start_time VARCHAR2(10),
+    end_time VARCHAR2(10)
+);
+
+-- Create Prereq table
+CREATE TABLE Prereq (
+    course_id VARCHAR2(10),
+    prereq_id VARCHAR2(10),
+    PRIMARY KEY (course_id, prereq_id),
+    FOREIGN KEY (course_id) REFERENCES Course(course_id),
+    FOREIGN KEY (prereq_id) REFERENCES Course(course_id)
+);
+
+*/
