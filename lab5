@@ -1,0 +1,78 @@
+-- Create the EMPLOYEE table
+CREATE TABLE EMPLOYEE (
+  Fname VARCHAR2(20) NOT NULL,
+  Minit CHAR(1),
+  Lname VARCHAR2(20) NOT NULL,
+  Bdate DATE,
+  Address VARCHAR2(50),
+  Ssn INTEGER NOT NULL,
+  Salary DECIMAL(10,2),
+  Sex CHAR(1),
+  Works_for INTEGER,
+  Supervisor INTEGER,
+  CONSTRAINT emp_pk PRIMARY KEY (Ssn)
+);
+
+-- Create the DEPARTMENT table
+CREATE TABLE DEPARTMENT (
+  Dname VARCHAR2(20) NOT NULL,
+  Dnumber INTEGER NOT NULL,
+  Mgr_ssn INTEGER,
+  Locations VARCHAR2(20),
+  Number_of_employees INTEGER,
+  CONSTRAINT dept_pk PRIMARY KEY (Dname, Dnumber)
+);
+
+-- Create the DEPENDENT table
+CREATE TABLE DEPENDENT (
+  Dnumber INTEGER NOT NULL,
+  Dep_name VARCHAR2(20) NOT NULL,
+  Sex CHAR(1),
+  Birth_date DATE,
+  Relationship VARCHAR2(20),
+  CONSTRAINT dep_pk PRIMARY KEY (Dnumber, Dep_name)
+);
+
+-- Create the LOCATIONS table
+CREATE TABLE LOCATIONS (
+  LocationID INTEGER NOT NULL,
+  Dname VARCHAR2(20) NOT NULL,
+  Dnumber INTEGER NOT NULL,
+  Location VARCHAR2(50);
+  CONSTRAINT dep_pk PRIMARY KEY (LocationID)
+);
+
+-- Create the PROJECT table
+CREATE TABLE PROJECT (
+  Pname VARCHAR2(20) NOT NULL,
+  Plocation VARCHAR2(20),
+  Dnumber INTEGER,
+  CONSTRAINT proj_pk PRIMARY KEY (Pname, Dnumber)
+);
+
+-- Create the WORKS_ON table
+CREATE TABLE WORKS_ON (
+  Essn INTEGER NOT NULL,
+  Pname VARCHAR2(20) NOT NULL,
+  Hours DECIMAL(5,2),
+  CONSTRAINT wo_pk PRIMARY KEY (Essn, Pname),
+  FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Dnumber),
+  FOREIGN KEY (Pname) REFERENCES PROJECT(Pname)
+);
+
+-- Create the SUPERVISION table
+CREATE TABLE SUPERVISION (
+  Essn INTEGER NOT NULL,
+  Superssn INTEGER NOT NULL,
+  CONSTRAINT sup_pk PRIMARY KEY (Essn, Superssn),
+  FOREIGN KEY (Essn) REFERENCES EMPLOYEE(Dnumber),
+  FOREIGN KEY (Superssn) REFERENCES EMPLOYEE(Dnumber)
+);
+
+-- Add foreign key constraints
+ALTER TABLE EMPLOYEE
+  ADD CONSTRAINT fk_emp_dept FOREIGN KEY (Dnumber) REFERENCES DEPARTMENT(Dnumber),
+  ADD CONSTRAINT fk_emp_mgr FOREIGN KEY (Supervisor) REFERENCES EMPLOYEE(Dnumber);
+
+ALTER TABLE DEPARTMENT
+  ADD CONSTRAINT fk_dept_mgr FOREIGN KEY (Mgr_ssn) REFERENCES EMPLOYEE(Dnumber);
