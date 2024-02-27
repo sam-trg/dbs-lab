@@ -1,0 +1,227 @@
+CREATE TABLE Students (
+    stu_id VARCHAR(10) PRIMARY KEY,
+    s_name VARCHAR(50) NOT NULL,
+    dept_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Instructors (
+    ins_id VARCHAR(10) PRIMARY KEY,
+    i_name VARCHAR(50) NOT NULL,
+    dept_name VARCHAR(50) NOT NULL,
+    salary NUMERIC(10,2) NOT NULL
+);
+
+CREATE TABLE Departments (
+    dept_name VARCHAR(50) PRIMARY KEY,
+    building VARCHAR(50) NOT NULL,
+    budget NUMERIC(12,2) NOT NULL
+);
+
+CREATE TABLE Courses (
+    course_id VARCHAR(10) PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    dept_name VARCHAR(50) NOT NULL,
+    sem varchar(20) NOT NULL,
+    year INT NOT NULL
+);
+
+CREATE TABLE registrations (
+    registration_id INT PRIMARY KEY,
+    s_id VARCHAR(10),
+    c_id VARCHAR(10),
+    i_id VARCHAR(10),
+    FOREIGN KEY (s_id) REFERENCES Students(stu_id),
+    FOREIGN KEY (c_id) REFERENCES Courses(course_id),
+    FOREIGN KEY (i_id) REFERENCES Instructors(ins_id)
+);
+
+INSERT INTO Departments (dept_name, building, budget) values ('CSE', 'Django Center', 850000);
+INSERT INTO Departments (dept_name, building, budget) values ('Biology', 'Yggdrasil Incubation Hall', 800000);
+INSERT INTO Departments (dept_name, building, budget) values ('Physics', 'Franklin Lab', 600000);
+
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0101', 'Gajraj Lodha', 'CSE');
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0102', 'Rohan Bajaj', 'CSE');
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0103', 'Hemraj Tonpe', 'Biology');
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0104', 'Snehal Soni', 'CSE');
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0105', 'Joseph Faust', 'Biology');
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0106', 'Farhan Hasan', 'Physics');
+INSERT INTO Students (stu_id, s_name, dept_name) values ('S0107', 'George Philip', 'Biology');
+
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C101', 'Data Structures', 'CSE', 'Fall', 2009);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C102', 'Algorithm Design', 'CSE', 'Fall', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C103', 'Madam Curie''s Research', 'Biology', 'Spring', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C104', 'DBMS', 'CSE', 'Fall', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C105', 'Metamorphosis', 'Biology', 'Spring', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C106', 'Thermostatics', 'Physics', 'Spring', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C107', 'Mendel''s Contribution', 'Biology', 'Fall', 2009);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C108', 'Rotor Forces', 'Physics', 'Spring', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C109', 'Enamel Theisis', 'Biology', 'Spring', 2009);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C110', 'Networking', 'CSE', 'Fall', 2010);
+INSERT INTO Courses (course_id, title, dept_name, sem, year) values ('C111', 'Thermostatics', 'Physics', 'Fall', 2009);
+
+
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I01', 'Rishi Shah', 'CSE', 700000);
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I02', 'Tarak Mandi', 'CSE', 950000);
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I03', 'Dharmesh Singh', 'Biology', 800000);
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I04', 'Snehal Soni', 'CSE', 950000);
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I05', 'Mahesh Nair', 'Biology', 800000);
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I06', 'Gagan Negi', 'Physics', 1050000);
+INSERT INTO Instructors (ins_id, i_name, dept_name, salary) values ('I07', 'Harold Denver', 'Biology', 850000);
+
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (2077, 'S0101', 'C101', 'I01');
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (2087, 'S0102', 'C102', 'I02');
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (2097, 'S0103', 'C103', 'I03');
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (2098, 'S0104', 'C104', 'I04');
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (2099, 'S0105', 'C105', 'I05');
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (3000, 'S0106', 'C106', 'I06');
+INSERT INTO registrations (registration_id, s_id, c_id, i_id) values (3001, 'S0107', 'C107', 'I07');
+
+--1
+SELECT title
+FROM Courses
+WHERE sem = 'Fall' AND year = 2009
+UNION
+SELECT title
+FROM Courses
+WHERE sem = 'Spring' AND year = 2010;
+
+--2
+SELECT title
+FROM Courses
+WHERE sem = 'Fall' AND year = 2009
+INTERSECT
+SELECT title
+FROM Courses
+WHERE sem = 'Spring' AND year = 2010;
+
+--3
+SELECT title
+FROM Courses
+WHERE sem = 'Fall' AND year = 2009
+MINUS
+SELECT title
+FROM Courses
+WHERE sem = 'Spring' AND year = 2010;
+
+--4
+SELECT title
+FROM courses
+WHERE course_id NOT IN (SELECT course_id FROM registrations);
+
+--5
+SELECT title
+FROM courses
+WHERE sem = 'Fall' AND year = 2009
+AND title IN (SELECT title FROM courses WHERE sem = 'Spring' AND year = 2010);
+
+--6
+SELECT COUNT(DISTINCT s_id)
+FROM registrations
+WHERE i_id = 'I03';
+
+--7
+SELECT title
+FROM courses
+WHERE sem = 'Fall' AND year = 2009
+AND title NOT IN (SELECT title FROM courses WHERE sem = 'Spring' AND year = 2010);
+
+--8
+SELECT s_name, i_name
+FROM Students s, Instructors i
+WHERE s.s_name = i.i_name;
+
+--9
+SELECT i_name
+FROM instructors
+WHERE salary > (
+    SELECT MIN(salary)
+    FROM instructors
+    WHERE dept_name = 'Biology'
+);
+
+--10
+SELECT i_name
+FROM instructors
+WHERE salary > ALL (
+    SELECT salary
+    FROM instructors
+    WHERE dept_name = 'Biology'
+);
+
+--11
+WITH DepartmentAvgSalaries AS (
+    SELECT dept_name, AVG(salary) AS avg_salary,
+    RANK() OVER (ORDER BY AVG(salary) DESC) AS salary_rank
+    FROM Instructors
+    GROUP BY dept_name
+)
+SELECT dept_name FROM DepartmentAvgSalaries WHERE salary_rank = 1;
+
+--12
+SELECT dept_name
+FROM Departments
+WHERE budget < ALL (SELECT salary FROM Instructors);
+
+--13
+SELECT title FROM Courses
+WHERE EXISTS (
+SELECT * FROM Courses
+WHERE (sem = 'Fall' AND year = 2009)
+INTERSECT
+SELECT * FROM Courses
+WHERE (sem = 'Spring' AND year = 2010)
+);
+
+--14
+SELECT stu_id, s_name
+FROM students s
+WHERE NOT EXISTS (
+    SELECT course_id
+    FROM courses c
+    WHERE c.dept_name = 'Biology'
+      AND NOT EXISTS (
+          SELECT *
+          FROM registrations r
+          WHERE r.s_id = s.stu_id
+            AND r.c_id = c.course_id
+      )
+);
+
+--15
+SELECT title
+FROM courses
+WHERE year = 2009
+GROUP BY title
+HAVING COUNT(*) <= 1;
+
+--16
+SELECT s.stu_id, s.s_name
+FROM students s
+JOIN registrations r ON s.stu_id = r.s_id
+JOIN courses c ON r.c_id = c.course_id
+WHERE c.dept_name = 'CSE'
+GROUP BY s.stu_id, s.s_name
+HAVING COUNT(DISTINCT c.course_id) >= 2;
+
+--17
+SELECT dept_name, AVG(salary) AS average_salary
+FROM instructors
+GROUP BY dept_name
+HAVING AVG(salary) > 900000;
+
+--18
+CREATE VIEW all_courses AS
+SELECT c.course_id, c.title, c.dept_name, c.sem, c.year
+FROM Courses c
+WHERE c.dept_name = 'Physics' AND c.sem = 'Fall' AND c.year = 2009;
+
+--19
+SELECT * FROM all_courses;
+
+--20
+CREATE VIEW department_total_salary AS
+SELECT dept_name, SUM(salary) AS total_salary
+FROM instructors
+GROUP BY dept_name;
+
+SELECT * FROM department_total_salary;
